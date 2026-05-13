@@ -12,7 +12,7 @@ from apps.ai_service.models.auth import (
 )
 from apps.ai_service.services.auth_service import auth_service
 
-router = APIRouter(prefix="/auth", tags=["auth"], dependencies=[Depends(require_api_key)])
+router = APIRouter(prefix="/auth", tags=["auth"])
 
 
 @router.post("/api-keys", response_model=dict)
@@ -49,7 +49,7 @@ async def create_api_key(request: APIKeyCreateRequest) -> dict:
         }
 
 
-@router.get("/api-keys", response_model=dict)
+@router.get("/api-keys", response_model=dict, dependencies=[Depends(require_api_key)])
 async def list_api_keys(user_id: str | None = None) -> dict:
     """
     List all API keys for a user.
@@ -84,7 +84,7 @@ async def list_api_keys(user_id: str | None = None) -> dict:
         }
 
 
-@router.post("/api-keys/{key_id}/revoke", response_model=dict)
+@router.post("/api-keys/{key_id}/revoke", response_model=dict, dependencies=[Depends(require_api_key)])
 async def revoke_api_key(key_id: str) -> dict:
     """
     Revoke an API key by ID.
