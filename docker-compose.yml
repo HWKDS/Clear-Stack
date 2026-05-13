@@ -10,12 +10,22 @@ services:
       - clearstack_db_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U clearstack"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
   redis:
     image: redis:7
     restart: unless-stopped
     ports:
       - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
   ollama:
     image: ollama/ollama:latest
@@ -30,11 +40,14 @@ services:
       context: .
       dockerfile: apps/ai_service/Dockerfile
     depends_on:
-      - db
-      - redis
-      - ollama
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      ollama:
+        condition: service_started
     environment:
-      DATABASE_URL: postgresql://clearstack:clearstack@db:5432/clearstack
+      DATABASE_URL: postgresql+psycopg://clearstack:clearstack@db:5432/clearstack
       REDIS_URL: redis://redis:6379/0
       OPENAI_API_KEY: ""
       NEXT_PUBLIC_API_URL: http://localhost:8000
