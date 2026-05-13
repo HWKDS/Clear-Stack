@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+pytest
+pytest-cov
+httpx
+sqlmodel
+psycopg[binary]
+PyJWT

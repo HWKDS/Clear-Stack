@@ -1,0 +1,59 @@
+services:
+  db:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: clearstack
+      POSTGRES_PASSWORD: clearstack
+      POSTGRES_DB: clearstack
+    volumes:
+      - clearstack_db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+    # Ollama may require host privileges or additional volumes per their docs.
+    # Adjust this service according to your local Ollama setup.
+    ports:
+      - "11434:11434"
+
+  backend:
+    build:
+      context: .
+      dockerfile: apps/ai_service/Dockerfile
+    depends_on:
+      - db
+      - redis
+      - ollama
+    environment:
+      DATABASE_URL: postgresql://clearstack:clearstack@db:5432/clearstack
+      REDIS_URL: redis://redis:6379/0
+      OPENAI_API_KEY: ""
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+      # Add other env vars as needed (CLERK keys, etc.)
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app:cached
+    command:
+      [
+        "uvicorn",
+        "apps.ai_service.main:app",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8000",
+        "--workers",
+        "1",
+      ]
+
+volumes:
+  clearstack_db_data:
