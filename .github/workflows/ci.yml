@@ -60,7 +60,7 @@ jobs:
       - name: Run unit and integration tests
         env:
           PYTHONPATH: ${{ github.workspace }}
-          DATABASE_URL: postgresql://clearstack:clearstack@localhost:5432/clearstack
+          DATABASE_URL: postgresql+psycopg://clearstack:clearstack@localhost:5432/clearstack
           REDIS_URL: redis://localhost:6379/0
           SERVICE_API_KEY: test-key-for-ci
         run: |
