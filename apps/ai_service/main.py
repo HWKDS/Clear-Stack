@@ -8,6 +8,7 @@ from apps.ai_service.routers.digest import router as digest_router
 from apps.ai_service.routers.generation import router as generation_router
 from apps.ai_service.routers.integrations import router as integrations_router
 from apps.ai_service.routers.notifications import router as notifications_router
+from apps.ai_service.routers.ollama_proxy import router as ollama_router
 from apps.ai_service.core.rate_limiter import RateLimitMiddleware
 
 
@@ -45,3 +46,4 @@ app.include_router(generation_router)
 app.include_router(notifications_router)
 app.include_router(digest_router)
 app.include_router(integrations_router)
+app.include_router(ollama_router)

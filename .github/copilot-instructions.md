@@ -1,4 +1,4 @@
-# 🤖 GitHub Copilot Instructions — PulseHub (AI-Powered Unified Notification Hub)
+# 🤖 GitHub Copilot Instructions — Clear Stack (AI-Powered Unified Notification Hub)
 
 ## 👤 About Me (The Developer)
 
@@ -6,6 +6,7 @@ I am a **Computer Science (AI) student** learning full-stack development while b
 I want to understand **every line of code** — not just have it written for me.
 
 **My learning goals:**
+
 - Understand backend architecture (APIs, databases, queues, auth)
 - Understand frontend structure (components, state, routing, UI)
 - Learn how AI/NLP integrates into a real product
@@ -25,10 +26,11 @@ I want to understand **every line of code** — not just have it written for me.
 
 ## 🚀 Project Overview
 
-**Project Name:** PulseHub
-**Tagline:** *Your notifications, intelligently unified.*
+**Project Name:** Clear Stack
+**Tagline:** _Your notifications, intelligently unified._
 
-PulseHub is an AI-powered notification aggregation platform that:
+Clear stack is an AI-powered notification aggregation platform that:
+
 - Pulls notifications from **Gmail, WhatsApp, LinkedIn, Google Calendar**
 - Uses **NLP** to summarize, prioritize, and group related notifications
 - Presents everything in a **clean unified dashboard**
@@ -42,57 +44,62 @@ PulseHub is an AI-powered notification aggregation platform that:
 ## 🛠️ Tech Stack (Chosen for Startup Scalability)
 
 ### Frontend
-| Tool | Version | Why |
-|------|---------|-----|
-| **Next.js** | 14+ (App Router) | Full-stack React framework; great SEO, server components, API routes |
-| **TypeScript** | 5+ | Catches bugs early; essential for team/startup work |
-| **Tailwind CSS** | 3+ | Rapid styling without leaving HTML |
-| **shadcn/ui** | latest | High-quality accessible components built on Radix UI |
-| **Zustand** | latest | Simple, scalable client state management |
-| **React Query (TanStack)** | v5 | Server state, caching, background refetching |
-| **Socket.io Client** | latest | Real-time notification updates in the dashboard |
+
+| Tool                       | Version          | Why                                                                  |
+| -------------------------- | ---------------- | -------------------------------------------------------------------- |
+| **Next.js**                | 14+ (App Router) | Full-stack React framework; great SEO, server components, API routes |
+| **TypeScript**             | 5+               | Catches bugs early; essential for team/startup work                  |
+| **Tailwind CSS**           | 3+               | Rapid styling without leaving HTML                                   |
+| **shadcn/ui**              | latest           | High-quality accessible components built on Radix UI                 |
+| **Zustand**                | latest           | Simple, scalable client state management                             |
+| **React Query (TanStack)** | v5               | Server state, caching, background refetching                         |
+| **Socket.io Client**       | latest           | Real-time notification updates in the dashboard                      |
 
 ### Backend (Python — AI Services)
-| Tool | Version | Why |
-|------|---------|-----|
-| **FastAPI** | latest | Async Python API; perfect for AI/NLP workloads |
-| **Pydantic v2** | latest | Data validation and settings management |
-| **Celery + Redis** | latest | Background job processing (fetching, summarizing notifications) |
-| **LangChain** | latest | Orchestrating LLM calls for summarization & prioritization |
-| **OpenAI API (GPT-4o)** | latest | NLP: summarization, urgency detection, context linking |
-| **Hugging Face Transformers** | latest | For offline/cheaper NLP alternatives |
+
+| Tool                          | Version | Why                                                             |
+| ----------------------------- | ------- | --------------------------------------------------------------- |
+| **FastAPI**                   | latest  | Async Python API; perfect for AI/NLP workloads                  |
+| **Pydantic v2**               | latest  | Data validation and settings management                         |
+| **Celery + Redis**            | latest  | Background job processing (fetching, summarizing notifications) |
+| **LangChain**                 | latest  | Orchestrating LLM calls for summarization & prioritization      |
+| **OpenAI API (GPT-4o)**       | latest  | NLP: summarization, urgency detection, context linking          |
+| **Hugging Face Transformers** | latest  | For offline/cheaper NLP alternatives                            |
 
 ### Database & Storage
-| Tool | Why |
-|------|-----|
+
+| Tool                          | Why                                                     |
+| ----------------------------- | ------------------------------------------------------- |
 | **PostgreSQL (via Supabase)** | Primary database; handles users, notifications, digests |
-| **Redis (via Upstash)** | Caching, job queues, real-time pub/sub |
-| **Prisma ORM** | Type-safe DB queries from Next.js backend |
+| **Redis (via Upstash)**       | Caching, job queues, real-time pub/sub                  |
+| **Prisma ORM**                | Type-safe DB queries from Next.js backend               |
 
 ### Auth & Integrations
-| Tool | Why |
-|------|-----|
-| **Clerk** | Auth with OAuth (Google, GitHub); handles JWT, sessions |
-| **Gmail API** | Fetch email notifications |
-| **Google Calendar API** | Fetch calendar events |
-| **WhatsApp Business API** | Fetch WhatsApp messages |
-| **LinkedIn API** | Fetch LinkedIn notifications |
+
+| Tool                      | Why                                                     |
+| ------------------------- | ------------------------------------------------------- |
+| **Clerk**                 | Auth with OAuth (Google, GitHub); handles JWT, sessions |
+| **Gmail API**             | Fetch email notifications                               |
+| **Google Calendar API**   | Fetch calendar events                                   |
+| **WhatsApp Business API** | Fetch WhatsApp messages                                 |
+| **LinkedIn API**          | Fetch LinkedIn notifications                            |
 
 ### Infrastructure & DevOps
-| Tool | Why |
-|------|-----|
-| **Turborepo** | Monorepo management for frontend + backend packages |
-| **Vercel** | Deploy Next.js frontend (free tier → scales automatically) |
-| **Railway** | Deploy FastAPI backend + Celery workers |
-| **Docker** | Containerize FastAPI service for consistency |
-| **GitHub Actions** | CI/CD pipeline — auto test and deploy on push |
+
+| Tool               | Why                                                        |
+| ------------------ | ---------------------------------------------------------- |
+| **Turborepo**      | Monorepo management for frontend + backend packages        |
+| **Vercel**         | Deploy Next.js frontend (free tier → scales automatically) |
+| **Railway**        | Deploy FastAPI backend + Celery workers                    |
+| **Docker**         | Containerize FastAPI service for consistency               |
+| **GitHub Actions** | CI/CD pipeline — auto test and deploy on push              |
 
 ---
 
 ## 📁 Project Structure
 
 ```
-pulsehub/
+ClearStack/
 ├── apps/
 │   ├── web/                        # Next.js frontend (App Router)
 │   │   ├── app/
@@ -144,6 +151,7 @@ pulsehub/
 ## 🧠 Core Feature Architecture
 
 ### 1. Notification Pipeline (Most Important — Learn This First)
+
 ```
 Platform APIs → Fetcher (Celery task) → Raw Notification stored in DB
 → NLP Pipeline (FastAPI):
@@ -155,11 +163,13 @@ Platform APIs → Fetcher (Celery task) → Raw Notification stored in DB
 ```
 
 ### 2. Priority Scoring System
+
 - **High (80-100):** Deadlines, meeting now, financial alerts
 - **Medium (40-79):** Replies, updates requiring action
 - **Low (0-39):** Newsletter, social likes, FYI notifications
 
 ### 3. Daily Digest
+
 - Celery beat scheduler triggers digest generation at 8 AM
 - LLM groups and summarizes all notifications from last 24h
 - Sent via email + shown in dashboard digest panel
@@ -169,6 +179,7 @@ Platform APIs → Fetcher (Celery task) → Raw Notification stored in DB
 ## 📐 Code Standards
 
 ### TypeScript / Next.js
+
 - Use `async/await` — never raw `.then()` chains
 - Always define prop types with TypeScript interfaces (never `any`)
 - Use **Server Components** by default; add `"use client"` only when needed (interactivity, hooks)
@@ -176,6 +187,7 @@ Platform APIs → Fetcher (Celery task) → Raw Notification stored in DB
 - Always handle loading and error states in UI
 
 ### Python / FastAPI
+
 - Use **async def** for all route handlers
 - Validate all inputs with Pydantic models — never trust raw request data
 - Use dependency injection (`Depends()`) for auth, DB sessions
@@ -183,6 +195,7 @@ Platform APIs → Fetcher (Celery task) → Raw Notification stored in DB
 - Write docstrings for every function explaining what it does
 
 ### General
+
 - **No magic numbers** — use named constants
 - **No hardcoded secrets** — everything in `.env` files
 - Commit messages follow Conventional Commits: `feat:`, `fix:`, `docs:`, `refactor:`
